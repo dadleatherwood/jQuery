@@ -31,26 +31,26 @@ $(document).ready(function(){
     $('#newTaskForm').slideToggle('fast', 'linear');
   };
 
-  $('#saveNewItem').on('click', function (e){
+  $('#saveNewItem').on('click', function (e) {
     e.preventDefault();
     var task = $('#newItemInput').val().trim();
     addTask(task);
-  });
+});
 
   //open form
   $('#add-todo').on('click', function () {
-    $('#newTaskForm').fadeToggle('fast', 'linear');
+      $('#newTaskForm').fadeToggle('fast', 'linear');
   });
-
-  //close form
+  //closes form
   $('#cancel').on('click', function (e) {
-    e.preventDefault();
-    $('newTaskForm').fadeToggle('fast', 'linear');
+      e.preventDefault();
+      $('#newTaskForm').fadeToggle('fast', 'linear');
   });
 
   //STEP # 4
     var advanceTask = function(task) {
     var modified = task.innerText.trim()
+    console.log(task.innerText);
     for (var i = 0; i < listo.length; i++) {
       if (listo[i].task === modified) {
         if (listo[i].id === 'new') {
@@ -70,9 +70,11 @@ $(document).ready(function(){
   $(document).on('click', '#item', function(e){
       e.preventDefault();
     var task = this;
+    console.log(this, task);
     advanceTask(task);
     this.id = 'inProgress';
     $('#currentList').append(this.outerHTML);
+    console.log(this);
   });
 
   //MOVE FROM 'IN PROGRESS' TO 'ARCHIVED'
@@ -93,5 +95,8 @@ $(document).ready(function(){
   });
   //ADD LIST ITEMS TO LOCAL STORAGE
   var tempList = JSON.stringify(listo);
-  localStorage.setItem('listo',tempList);
+  localStorage.setItem('listo', tempList);
+  localStorage.getItem('listo')
+
+
 });
